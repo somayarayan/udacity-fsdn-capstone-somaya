@@ -1,0 +1,31 @@
+# This file should be included in .gitignore to not store sensitive data in version control
+import os
+SECRET_KEY = os.urandom(32)
+
+# Grabs the folder where the script runs.
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+database_setup = {
+   "database_name" : "casting",
+   "user_name" : "postgres", # default postgres user name
+   "password" : "postgres", # if applicable. If no password, just type in None
+   "port" : "localhost:5432" # default postgres port
+}
+
+auth0_config = {
+    "AUTH0_DOMAIN" : "fsnds.eu.auth0.com", # TTe auth0 domain prefix
+    "ALGORITHMS" : ["RS256"],
+    "API_AUDIENCE" : "Casting", # The audience set for the auth0 app
+    "clientId": 'reIq7tebc917ZSQZTmiKcHTbY4I8OTMf', # The client id generated for the auth0 app,
+    "callbackURL": 'http://localhost:8100',  # The base url of the running ionic application.
+}
+
+pagination = {
+    "example" : 10 # Limits returned rows of API
+}
+
+bearer_tokens = {
+    "casting_assistant" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZTgwYzgzMjVkZTFhMzBjNWVjZjNkOTciLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MzU2LCJleHAiOjE1ODg1MjQ1NTYsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJHRVQ6YWN0b3JzIiwiR0VUOm1vdmllcyJdfQ.riT55fGAzzJiaI6cAwhmdZ4vMM0xlpVg29MO1ByWPCqDPR40HUS52UM3OXB0d88Gb4ymHlYKGHi_4PJazQnt-WuENhB8bSzXy44NrBV6QsfbMsiG4dDMOjaliEBynd6BNCB81G8ygpo2p0dki755gdG7zY25lrn6jZMfMqWEwcN8KmVVpvt8yPUrd1zmaelCQlq-EBavYIbl97ya7Z4xNri15TxKHyOMAOKAx07aihkjFzUhD1NYqQqrStOSDX7wbF5vqQdZ0Kb1rogNqk_jmdDsCTC_kRGM87eBcZh7dNc-gLIiPebW44Oop5fqnRodSDMkSjTRkjKRYiH6iaWn6Q",
+    "executive_producer" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ",
+    "casting_director" : "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZTkwYTM5ZGY3NTk2MjBjMDhjN2JkYWYiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MjgyLCJleHAiOjE1ODg1MjQ0ODIsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiR0VUOmFjdG9ycyIsIkdFVDptb3ZpZXMiLCJQQVRDSDphY3RvcnMiLCJQQVRDSDptb3ZpZXMiLCJQT1NUOmFjdG9ycyJdfQ.CHN-jNaGGnrLH-cKWDiQSaCH9gT2Pgz0G0TAhFRjCEKwDDyyFOsoLyrYiTaUHH8mpatmeARurMU1Iv8tKmOg21XyOUBv8Q_Dnu7bdfEK-yMlWN_7PGR8cgcziY35Gy0pGOGtoeFxkxtWaum6k_taoIrL8JSyUEWzSLU2l3HrCDV6LQ1qC7ub0rugGrVcoeeU7W0b0p3C7ZG2jOnWJSi5BNWhu6aVRrRzk5TnLogcf3Z7t2-DaoJWLsMAmP5c7M1OG88azXjyxn6nEo4fFtqOALCySDI0WOmStpbRnl76T62jJLoOOIgvkQA_WGp3Sf-yRU9x-HKwMI0rp7aayG6xlQ"
+}
