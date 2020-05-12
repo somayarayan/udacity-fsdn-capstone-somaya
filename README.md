@@ -10,7 +10,9 @@
 <a name="background"></a>
 ## Project Motivation and Background
 
-Learning by doing can be hard, but it’s ultimately very beneficial and it's really excited to finally reach this stage and work on the final project of the `Udacity Full Stack Nanodegree` program to apply and link all the topics and modules that are part of the progrem together in one single project.
+Learning by doing can be hard, but it’s ultimately very beneficial and it's really exciting to finally reach this stage and work on the final project of the `Udacity Full Stack Nanodegree` program to apply and link all the topics and modules that are part of the progrem together in one single project.
+
+The project idea is basically a Casting Agency that models a company which is responsible for creating movies and managing and assigning actors to those movies. 
 
 This project covers the following technical topics in 1 application:
 
@@ -41,12 +43,12 @@ $ pip install -r requirements.txt
 ```
 
 Running this project locally means that it can´t access `Heroku` env variables.
-To fix this, you need to edit a few informations in `config.py`, so it can
+To fix this, you need to edit a few configurations in `config.py`, so it can
 correctly connect to a local database
 
 3. Change database config so it can connect to your local postgres database
 - Open `config.py` with your editor of choice. 
-- Here you can see this dict:
+- Here you can see this configuration:
  ```python
 database_setup = {
     "database_name" : "casting",
@@ -91,9 +93,9 @@ OK
 ## API Documentation
 <a name="api"></a>
 
-Here you can find all existing endpoints, which methods can be used, how to work with them & example responses you´ll get.
+Here you can find all existing endpoints, which methods can be used, how to work with them and example responses you will get.
 
-Additionally, common issues & error messages are explained, if applicable.
+Additionally, common issues and error messages are explained, if applicable.
 
 ### Base URL
 
@@ -105,7 +107,7 @@ Please see [API Authentication](#Authentication-bearer)
 
 ### Available Endpoints
 
-This is a table about which ressources exist and which method you can use on them.
+This is a table about which resources exist and which methods you can use on them.
 
                           Allowed Methods
        Endpoints    |  GET |  POST |  DELETE | PATCH  |
@@ -115,7 +117,7 @@ This is a table about which ressources exist and which method you can use on the
 
 ### How to work with each endpoint
 
-Click on a link to directly get to the ressource.
+Click on a link to directly get to the resource.
 
 1. Actors
    1. [GET /actors](#get-actors)
@@ -131,8 +133,8 @@ Click on a link to directly get to the ressource.
 Each resource documentation is clearly structured:
 1. Description in a few words
 2. `curl` example that can directly be used in terminal
-3. More descriptive explanation of input & outputs.
-4. Required permission
+3. More descriptive explanation of inputs and outputs.
+4. Required permissions
 5. Example Request
 7. Example Response.
 8. Error Handling (`curl` command to trigger error + error response)
@@ -152,19 +154,19 @@ $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page1
   1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `GET:actors`
 - Returns: 
-  1. List of dict of actors with following fields:
+  1. List of actors with following fields:
       - **integer** `id`
       - **string** `name`
       - **string** `gender`
       - **integer** `age`
   2. **boolean** `success`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.com/actors' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ'
 ```
-#### Example response
+#### Example Response
 ```js
 {
     "actors": [
@@ -222,7 +224,7 @@ $ curl -X POST https://udacity-fsdn-capstone-somaya.herokuapp.com/actors
   1. **integer** `id from newly created actor`
   2. **boolean** `success`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.com/actors' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ' \
@@ -234,7 +236,7 @@ curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.c
 }'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
     "created": 2,
@@ -243,7 +245,7 @@ curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.c
 
 ```
 #### Errors
-If you try to create a new actor without a requiered field like `name`,
+If you try to create a new actor without a required field like `name`,
 it will throw a `422` error:
 
 ```bash
@@ -280,13 +282,13 @@ $ curl -X PATCH https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/1
 - Returns: 
   1. **integer** `id from updated actor`
   2. **boolean** `success`
-  3. List of dict of actors with following fields:
+  3. List of actors with following fields:
       - **integer** `id`
       - **string** `name`
       - **string** `gender`
       - **integer** `age`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request PATCH 'https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/1' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ' \
@@ -298,7 +300,7 @@ curl --location --request PATCH 'https://udacity-fsdn-capstone-somaya.herokuapp.
 }'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
     "actor": [
@@ -314,7 +316,7 @@ curl --location --request PATCH 'https://udacity-fsdn-capstone-somaya.herokuapp.
 }
 ```
 #### Errors
-If you try to update an actor with an invalid id it will throw an `404`error:
+If you try to update an actor with an invalid id it will throw a `404`error:
 
 ```bash
 $ curl -X PATCH https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/125
@@ -329,7 +331,7 @@ will return
   "success": false
 }
 ```
-Additionally, trying to update an Actor without sending actor ID in the URL will result in an `400` error:
+Additionally, trying to update an Actor without sending actor ID in the URL will result in a `400` error:
 
 ```js
 {
@@ -356,13 +358,13 @@ $ curl -X DELETE https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/1
   1. **integer** `id from deleted actor`
   2. **boolean** `success`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request DELETE 'https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/3' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZTkwYTM5ZGY3NTk2MjBjMDhjN2JkYWYiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MjgyLCJleHAiOjE1ODg1MjQ0ODIsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiR0VUOmFjdG9ycyIsIkdFVDptb3ZpZXMiLCJQQVRDSDphY3RvcnMiLCJQQVRDSDptb3ZpZXMiLCJQT1NUOmFjdG9ycyJdfQ.CHN-jNaGGnrLH-cKWDiQSaCH9gT2Pgz0G0TAhFRjCEKwDDyyFOsoLyrYiTaUHH8mpatmeARurMU1Iv8tKmOg21XyOUBv8Q_Dnu7bdfEK-yMlWN_7PGR8cgcziY35Gy0pGOGtoeFxkxtWaum6k_taoIrL8JSyUEWzSLU2l3HrCDV6LQ1qC7ub0rugGrVcoeeU7W0b0p3C7ZG2jOnWJSi5BNWhu6aVRrRzk5TnLogcf3Z7t2-DaoJWLsMAmP5c7M1OG88azXjyxn6nEo4fFtqOALCySDI0WOmStpbRnl76T62jJLoOOIgvkQA_WGp3Sf-yRU9x-HKwMI0rp7aayG6xlQ'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
     "deleted": 3,
@@ -371,7 +373,7 @@ curl --location --request DELETE 'https://udacity-fsdn-capstone-somaya.herokuapp
 
 ```
 #### Errors
-If you try to delete actor with an invalid id, it will throw an `404`error:
+If you try to delete actor with an invalid id, it will throw a `404`error:
 
 ```bash
 $ curl -X DELETE https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/125
@@ -402,19 +404,19 @@ $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page1
   1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `GET:movies`
 - Returns: 
-  1. List of dict of movies with following fields:
+  1. List of movies with following fields:
       - **integer** `id`
       - **string** `name`
       - **date** `release_date`
   2. **boolean** `success`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.com/movies' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
   "movies": [
@@ -465,7 +467,7 @@ $ curl -X POST https://udacity-fsdn-capstone-somaya.herokuapp.com/movies
   1. **integer** `id from newly created movie`
   2. **boolean** `success`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.com/movies' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ' \
@@ -476,7 +478,7 @@ curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.c
 }'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
     "created": 5,
@@ -484,7 +486,7 @@ curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.c
 }
 ```
 #### Errors
-If you try to create a new movie without a requiered field like `title`,
+If you try to create a new movie without a required field like `title`,
 it will throw a `422` error:
 
 ```bash
@@ -520,12 +522,12 @@ $ curl -X PATCH https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/1
 - Returns: 
   1. **integer** `id from updated movie`
   2. **boolean** `success`
-  3. List of dict of movies with following fields:
+  3. List of movies with following fields:
         - **integer** `id`
         - **string** `title` 
         - **date** `release_date` 
 
-#### Example request
+#### Example Request
 ```
 curl --location --request PATCH 'https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/3' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ' \
@@ -535,7 +537,7 @@ curl --location --request PATCH 'https://udacity-fsdn-capstone-somaya.herokuapp.
 }'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
     "movie": [
@@ -551,7 +553,7 @@ curl --location --request PATCH 'https://udacity-fsdn-capstone-somaya.herokuapp.
 
 ```
 #### Errors
-If you try to update an movie with an invalid id it will throw an `404`error:
+If you try to update a movie with an invalid id it will throw a `404`error:
 
 ```bash
 $ curl -X PATCH https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/125
@@ -566,7 +568,7 @@ will return
   "success": false
 }
 ```
-Additionally, trying to update an Movie without sending the movie ID in the URL will result in an `400` error:
+Additionally, trying to update a Movie without sending the movie ID in the URL will result in a `400` error:
 
 ```js
 {
@@ -594,13 +596,13 @@ $ curl -X DELETE https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/1
   1. **integer** `id from deleted movie`
   2. **boolean** `success`
 
-#### Example request
+#### Example Request
 ```
 curl --location --request DELETE 'https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/3' \
 --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJERTFSVGM0TVRrek9VWTJOalJGTVRoR016RTRRamRGUWpKRFJUaEJRa0l3UVRZeU1qTkNOQSJ9.eyJpc3MiOiJodHRwczovL2ZzbmRzLmV1LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWFlZDVlMGVhZjg1MTBiZTdlYTQ2M2UiLCJhdWQiOiJDYXN0aW5nIiwiaWF0IjoxNTg4NTE3MDk0LCJleHAiOjE1ODg1MjQyOTQsImF6cCI6InJlSXE3dGViYzkxN1pTUVpUbWlLY0hUYlk0SThPVE1mIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJERUxFVEU6YWN0b3JzIiwiREVMRVRFOm1vdmllcyIsIkdFVDphY3RvcnMiLCJHRVQ6bW92aWVzIiwiUEFUQ0g6YWN0b3JzIiwiUEFUQ0g6bW92aWVzIiwiUE9TVDphY3RvcnMiLCJQT1NUOm1vdmllcyJdfQ.NplgkoTXsrrMP4bJcba1ZPoS7T2uBSZ7_bdna59bEmIHs_ZsZyiDftjlHBlGwHNX2h2ZAlmFmDib8GaYbYxJCN-yE8gGkqPKDnKK8MQGPFergchKyQnM5wMfdL2r4Mk9HtZMBi0okAsbjtul7kbcYrI8xCGcmZAlxW5vPLHNYkxvb-PyhYWFGi3_As4w5Qa3tA3tTbX_B7AY3kuavALTjKkbWt-SYqx-bgtNlp4p2M3JEOmL1Pr3lLvh9tpCRKt9R2_vF1HEmR2uK1riN_yjRpCQOaTFkC5181BtZO78UchTqR5HapnJ9w1Gc8sGUEdBi-KW4exAn58vWKZKtkescQ'
 ```
 
-#### Example response
+#### Example Response
 ```js
 {
     "deleted": 3,
@@ -609,7 +611,7 @@ curl --location --request DELETE 'https://udacity-fsdn-capstone-somaya.herokuapp
 
 ```
 #### Errors
-If you try to delete movie with an invalid id, it will throw an `404`error:
+If you try to delete movie with an invalid id, it will throw a `404`error:
 
 ```bash
 $ curl -X DELETE https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/125
@@ -628,7 +630,7 @@ will return
 # <a name="authentication"></a>
 ## Authentication
 
-All API Endpoints are decorated with Auth0 permissions. To use the project locally, you need to config Auth0 accordingly
+All API Endpoints are decorated with Auth0 permissions. To use the project locally, you need to configure Auth0 accordingly
 
 ### Auth0 for locally use
 #### Create an App & API
@@ -645,7 +647,7 @@ All API Endpoints are decorated with Auth0 permissions. To use the project local
    3. Keep Algorithm as it is
 8. Go to Settings and find `Identifier`. Copy & paste it into config.py => auth0_config['API_AUDIENCE'] (i.e. replace `"Example"`)
 
-#### Create Roles & Permissions
+#### Create Roles and Permissions
 
 1. Before creating `Roles & Permissions`, you need to enable `Enable RBAC` and `Add Permissions in the Access Token` in your API (API => Click on your API Name => Settings => Enable RBAC and Add Permissions in the Access Token => Save)
 2. Also, check the button `Add Permissions in the Access Token`.
@@ -657,7 +659,7 @@ All API Endpoints are decorated with Auth0 permissions. To use the project local
 6. Under `Permissions`, assign all permissions you want this role to have. 
 
 # <a name="authentication-bearer"></a>
-### Auth0 to use existing API
+### Auth0 to use an Existing API
 If you want to access the real, temporary API, bearer tokens for all 3 roles are included in the `config.py` file.
 
 ## Existing Roles
