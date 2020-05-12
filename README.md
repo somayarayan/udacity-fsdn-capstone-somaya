@@ -185,7 +185,7 @@ curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.co
 }
 ```
 #### Errors
-If you try fetch a page that does not have any actors, you will encounter an error which looks like this:
+If you try fetch a page that does not have any actors, you will have an error which looks like this:
 
 ```bash
 $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page123124
@@ -429,7 +429,7 @@ curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.co
 
 ```
 #### Errors
-If you try fetch a page which does not have any movies, you will encounter an error which looks like this:
+If you try fetch a page which does not have any movies, you will have an error which looks like this:
 
 ```bash
 $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page123124
