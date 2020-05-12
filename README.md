@@ -636,7 +636,7 @@ All API Endpoints are decorated with Auth0 permissions. To use the project local
 1. Login to https://manage.auth0.com/ 
 2. Click on Applications Tab
 3. Create Application
-4. Give it a name like `Casting` and select "Regular Web Application"
+4. Give it a name like `Casting` and select "Regular Web Application". If you want to create Javascript application that integrates with API, select "Single Page Web Applications"
 5. Go to Settings and find `domain`. Copy & paste it into config.py => auth0_config['AUTH0_DOMAIN'] (i.e. replace `"fsnds.eu.auth0.com"`)
 6. Click on API Tab 
 7. Create a new API:
