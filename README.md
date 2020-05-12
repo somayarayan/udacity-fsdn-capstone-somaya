@@ -10,9 +10,9 @@
 <a name="background"></a>
 ## Project Motivation and Background
 
-Learning by doing can be hard, but it’s ultimately very beneficial and it's really it's really excited to finally reach this stage and work on the final project of the `Udacity-Full-Stack-Nanodegree` program to apply all the topics and modules that are part of the progrem in one project.
+Learning by doing can be hard, but it’s ultimately very beneficial and it's really excited to finally reach this stage and work on the final project of the `Udacity Full Stack Nanodegree` program to apply and link all the topics and modules that are part of the progrem together in one single project.
 
-This project covers following technical topics in 1 app:
+This project covers the following technical topics in 1 application:
 
 1. Database modeling with `postgres` & `sqlalchemy` (see `models.py`)
 2. API to performance CRUD Operations on database with `Flask` (see `app.py`)
@@ -83,7 +83,7 @@ If you choose to run all tests, it should give this response if everything went 
 $ python test_app.py
 .........................
 ----------------------------------------------------------------------
-Ran 25 tests in 18.132s
+Ran 25 tests in 77.708s
 
 OK
 
@@ -93,7 +93,7 @@ OK
 
 Here you can find all existing endpoints, which methods can be used, how to work with them & example responses you´ll get.
 
-Additionally, common pitfalls & error messages are explained, if applicable.
+Additionally, common issues & error messages are explained, if applicable.
 
 ### Base URL
 
@@ -128,7 +128,7 @@ Click on a link to directly get to the ressource.
    3. [DELETE /movies](#delete-movies)
    4. [PATCH /movies](#patch-movies)
 
-Each ressource documentation is clearly structured:
+Each resource documentation is clearly structured:
 1. Description in a few words
 2. `curl` example that can directly be used in terminal
 3. More descriptive explanation of input & outputs.
@@ -148,8 +148,8 @@ $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page1
 - Fetches a list of dictionaries of examples in which the keys are the ids with all available fields
 - Request Arguments: 
     - **integer** `page` (optional, 10 actors per page, defaults to `1` if not given)
-- Request Headers: **None**
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+- Request Headers: 
+    1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `GET:actors`
 - Returns: 
   1. List of dict of actors with following fields:
@@ -212,11 +212,11 @@ $ curl -X POST https://udacity-fsdn-capstone-somaya.herokuapp.com/actors
 
 - Request Arguments: **None**
 - Request Headers: (_application/json_)
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+      1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Request Body: (_application/json_)
-       1. **string** `name` (<span style="color:red">*</span>required)
-       2. **integer** `age` (<span style="color:red">*</span>required)
-       3. **string** `gender`
+      1. **string** `name` (<span style="color:red">*</span>required)
+      2. **integer** `age` (<span style="color:red">*</span>required)
+      3. **string** `gender`
 - Requires permission: `Post:actors`
 - Returns: 
   1. **integer** `id from newly created actor`
