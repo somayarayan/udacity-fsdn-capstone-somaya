@@ -145,11 +145,11 @@ Query paginated actors.
 ```bash
 $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page1
 ```
-- Fetches a list of dictionaries of examples in which the keys are the ids with all available fields
+- This API fetches the list of actors
 - Request Arguments: 
-    - **integer** `page` (optional, 10 actors per page, defaults to `1` if not given)
+  1. **integer** `page` (optional, 10 actors per page, defaults to `1` if not given)
 - Request Headers: 
-    1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `GET:actors`
 - Returns: 
   1. List of dict of actors with following fields:
@@ -185,7 +185,7 @@ curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.co
 }
 ```
 #### Errors
-If you try fetch a page which does not have any actors, you will encounter an error which looks like this:
+If you try fetch a page that does not have any actors, you will encounter an error which looks like this:
 
 ```bash
 $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page123124
@@ -196,7 +196,7 @@ will return
 ```js
 {
   "error": 404,
-  "message": "no actors found in database.",
+  "message": "No actors found.",
   "success": false
 }
 ```
@@ -204,7 +204,7 @@ will return
 # <a name="post-actors"></a>
 ### 2. POST /actors
 
-Insert new actor into database.
+Insert a new actor into the database.
 
 ```bash
 $ curl -X POST https://udacity-fsdn-capstone-somaya.herokuapp.com/actors
@@ -212,11 +212,11 @@ $ curl -X POST https://udacity-fsdn-capstone-somaya.herokuapp.com/actors
 
 - Request Arguments: **None**
 - Request Headers: (_application/json_)
-      1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Request Body: (_application/json_)
-      1. **string** `name` (<span style="color:red">*</span>required)
-      2. **integer** `age` (<span style="color:red">*</span>required)
-      3. **string** `gender`
+  1. **string** `name` (<span style="color:red">*</span>required)
+  2. **integer** `age` (<span style="color:red">*</span>required)
+  3. **string** `gender`
 - Requires permission: `Post:actors`
 - Returns: 
   1. **integer** `id from newly created actor`
@@ -255,7 +255,7 @@ will return
 ```js
 {
   "error": 422,
-  "message": "no name provided.",
+  "message": "No name provided, name is required.",
   "success": false
 }
 ```
@@ -271,11 +271,11 @@ $ curl -X PATCH https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/1
 
 - Request Arguments: **integer** `id from actor you want to update`
 - Request Headers: (_application/json_)
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Request Body: (_application/json_)
-       1. **string** `name` (<span style="color:red">*</span>required)
-       2. **integer** `age` (<span style="color:red">*</span>required)
-       3. **string** `gender`
+  1. **string** `name` (<span style="color:red">*</span>required)
+  2. **integer** `age` (<span style="color:red">*</span>required)
+  3. **string** `gender`
 - Requires permission: `PATCH:actors`
 - Returns: 
   1. **integer** `id from updated actor`
@@ -325,16 +325,16 @@ will return
 ```js
 {
   "error": 404,
-  "message": "Actor with id 125 not found in database.",
+  "message": "Actor with id 125 does not exist.",
   "success": false
 }
 ```
-Additionally, trying to update an Actor with already existing field values will result in an `422` error:
+Additionally, trying to update an Actor without sending actor ID in the URL will result in an `400` error:
 
 ```js
 {
-  "error": 422,
-  "message": "provided field values are already set. No update needed.",
+  "error": 400,
+  "message": "Actor id URL parameter is required, please add an actor id to the request URL.",
   "success": false
 }
 ```
@@ -350,7 +350,7 @@ $ curl -X DELETE https://udacity-fsdn-capstone-somaya.herokuapp.com/actors/1
 
 - Request Arguments: **integer** `id from actor you want to delete`
 - Request Headers: 
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `delete:actors`
 - Returns: 
   1. **integer** `id from deleted actor`
@@ -382,7 +382,7 @@ will return
 ```js
 {
   "error": 404,
-  "message": "Actor with id 125 not found in database.",
+  "message": "Actor with id 125 does not exist.",
   "success": false
 }
 ```
@@ -395,11 +395,11 @@ Query paginated movies.
 ```bash
 $ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page1
 ```
-- Fetches a list of dictionaries of examples in which the keys are the ids with all available fields
+- This API fetches the list of movies
 - Request Arguments: 
-    - **integer** `page` (optional, 10 movies per page, defaults to `1` if not given)
+  1. **integer** `page` (optional, 10 movies per page, defaults to `1` if not given)
 - Request Headers: 
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `GET:movies`
 - Returns: 
   1. List of dict of movies with following fields:
@@ -440,7 +440,7 @@ will return
 ```js
 {
   "error": 404,
-  "message": "no movies found in database.",
+  "message": "No movies found.",
   "success": false
 }
 ```
@@ -456,10 +456,10 @@ $ curl -X POST https://udacity-fsdn-capstone-somaya.herokuapp.com/movies
 
 - Request Arguments: **None**
 - Request Headers: (_application/json_)
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Request Body: (_application/json_)
-       1. **string** `title` (<span style="color:red">*</span>required)
-       2. **date** `release_date` (<span style="color:red">*</span>required)
+  1. **string** `title` (<span style="color:red">*</span>required)
+  2. **date** `release_date` (<span style="color:red">*</span>required)
 - Requires permission: `POST:movies`
 - Returns: 
   1. **integer** `id from newly created movie`
@@ -484,7 +484,7 @@ curl --location --request POST 'https://udacity-fsdn-capstone-somaya.herokuapp.c
 }
 ```
 #### Errors
-If you try to create a new movie without a requiered field like `name`,
+If you try to create a new movie without a requiered field like `title`,
 it will throw a `422` error:
 
 ```bash
@@ -496,7 +496,7 @@ will return
 ```js
 {
   "error": 422,
-  "message": "no name provided.",
+  "message": "No title provided, the title is required.",
   "success": false
 }
 ```
@@ -512,10 +512,10 @@ $ curl -X PATCH https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/1
 
 - Request Arguments: **integer** `id from movie you want to update`
 - Request Headers: (_application/json_)
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Request Body: (_application/json_)
-       1. **string** `title` 
-       2. **date** `release_date` 
+  1. **string** `title` 
+  2. **date** `release_date` 
 - Requires permission: `PATCH:movies`
 - Returns: 
   1. **integer** `id from updated movie`
@@ -562,16 +562,16 @@ will return
 ```js
 {
   "error": 404,
-  "message": "Movie with id 125 not found in database.",
+  "message": "Movie with id 125 does not exist.",
   "success": false
 }
 ```
-Additionally, trying to update an Movie with already existing field values will result in an `422` error:
+Additionally, trying to update an Movie without sending the movie ID in the URL will result in an `400` error:
 
 ```js
 {
-  "error": 422,
-  "message": "provided field values are already set. No update needed.",
+  "error": 400,
+  "message": "Movie id URL parameter is required, please add a movie id to the request URL.",
   "success": false
 }
 ```
@@ -585,9 +585,10 @@ Delete an existing movie
 $ curl -X DELETE https://udacity-fsdn-capstone-somaya.herokuapp.com/movies/1
 ```
 
-- Request Arguments: **integer** `id from movie you want to delete`
+- Request Arguments: 
+  1. **integer** `id from movie you want to delete`
 - Request Headers: 
-       1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
+  1. **JWT Bearer Token** `Authorization` (<span style="color:red">*</span>required)
 - Requires permission: `DELETE:movies`
 - Returns: 
   1. **integer** `id from deleted movie`
@@ -619,7 +620,7 @@ will return
 ```js
 {
   "error": 404,
-  "message": "Movie with id 125 not found in database.",
+  "message": "Movie with id 125 does not exist.",
   "success": false
 }
 ```
