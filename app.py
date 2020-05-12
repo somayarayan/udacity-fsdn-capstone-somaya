@@ -31,22 +31,22 @@ def create_app(test_config=None):
   # Custom Functions
   #----------------------------------------------------------------------------#
 
-  def get_error_message(error, default_text):
-      '''Returns default error text or custom error message (if not applicable)
+  def get_error_message(error, default_message):
+      '''Returns default error message or custom error message (if not applicable)
 
       *Input:
-          * <error> system generated error message which contains a description message
-          * <string> default text to be used as error message if Error has no specific message
+          * <error> system generated error message which contains a message description
+          * <string> default message to be used as error message if Error has no specific message
       *Output:
-          * <string> specific error message or default text(if no specific message is given)
+          * <string> specific error message or default error message(if no specific message is given)
 
       '''
       try:
           # Return message contained in error, if possible
           return error.description['message']
       except:
-          # otherwise, return given default text
-          return default_text
+          # otherwise, return given default message
+          return default_message
 
   def paginate_results(request, selection):
     '''Paginates and formats database queries
@@ -59,7 +59,7 @@ def create_app(test_config=None):
       * <list> list of dictionaries of objects, max. 10 objects
 
     '''
-    # Get page from request. If not given, default to 1
+    # Get page from request. If not is given, set default to 1
     page = request.args.get('page', 1, type=int)
     
     # Calculate start and end slicing
@@ -97,7 +97,7 @@ def create_app(test_config=None):
     actors_paginated = paginate_results(request, selection)
 
     if len(actors_paginated) == 0:
-      abort(404, {'message': 'no actors found in database.'})
+      abort(404, {'message': 'No actors found.'})
 
     return jsonify({
       'success': True,
@@ -121,7 +121,7 @@ def create_app(test_config=None):
     body = request.get_json()
 
     if not body:
-          abort(400, {'message': 'request does not contain a valid JSON body.'})
+          abort(400, {'message': 'Request does not contain a valid JSON body.'})
 
     # Extract name and age value from request body
     name = body.get('name', None)
@@ -132,10 +132,10 @@ def create_app(test_config=None):
 
     # abort if one of these are missing with appropiate error message
     if not name:
-      abort(422, {'message': 'no name provided.'})
+      abort(422, {'message': 'No name provided, name is required.'})
 
     if not age:
-      abort(422, {'message': 'no age provided.'})
+      abort(422, {'message': 'No age provided, age is required.'})
 
     # Create new instance of Actor & insert it.
     new_actor = (Actor(
@@ -167,20 +167,20 @@ def create_app(test_config=None):
 
     # Abort if no actor_id or body has been provided
     if not actor_id:
-      abort(400, {'message': 'please append an actor id to the request url.'})
+      abort(400, {'message': 'Actor id URL parameter is required, please add an actor id to the request URL.'})
 
     if not body:
-      abort(400, {'message': 'request does not contain a valid JSON body.'})
+      abort(400, {'message': 'Request does not contain a valid JSON body.'})
 
-    # Find actor which should be updated by id
+    # Find actor who should be updated by id
     actor_to_update = Actor.query.filter(Actor.id == actor_id).one_or_none()
 
     # Abort 404 if no actor with this id exists
     if not actor_to_update:
-      abort(404, {'message': 'Actor with id {} not found in database.'.format(actor_id)})
+      abort(404, {'message': 'Actor with id {} does not exist.'.format(actor_id)})
 
-    # Extract name and age value from request body
-    # If not given, set existing field values, so no update will happen
+    # Get name and age value from request body
+    # If not given, set the same existing field values, hence no update will happen
     name = body.get('name', actor_to_update.name)
     age = body.get('age', actor_to_update.age)
     gender = body.get('gender', actor_to_update.gender)
@@ -190,7 +190,7 @@ def create_app(test_config=None):
     actor_to_update.age = age
     actor_to_update.gender = gender
 
-    # Delete actor with new values
+    # Update actor with new values
     actor_to_update.update()
 
     # Return success, updated actor id and updated actor as formatted list
@@ -215,14 +215,14 @@ def create_app(test_config=None):
     """
     # Abort if no actor_id has been provided
     if not actor_id:
-      abort(400, {'message': 'please append an actor id to the request url.'})
+      abort(400, {'message': 'Actor id URL parameter is required, please add an actor id to the request URL.'})
   
-    # Find actor which should be deleted by id
+    # Find actor who should be deleted by id
     actor_to_delete = Actor.query.filter(Actor.id == actor_id).one_or_none()
 
     # If no actor with given id could found, abort 404
     if not actor_to_delete:
-        abort(404, {'message': 'Actor with id {} not found in database.'.format(actor_id)})
+        abort(404, {'message': 'Actor with id {} does not exist.'.format(actor_id)})
     
     # Delete actor from database
     actor_to_delete.delete()
@@ -253,7 +253,7 @@ def create_app(test_config=None):
     movies_paginated = paginate_results(request, selection)
 
     if len(movies_paginated) == 0:
-      abort(404, {'message': 'no movies found in database.'})
+      abort(404, {'message': 'No movies found.'})
 
     return jsonify({
       'success': True,
@@ -277,7 +277,7 @@ def create_app(test_config=None):
     body = request.get_json()
 
     if not body:
-          abort(400, {'message': 'request does not contain a valid JSON body.'})
+          abort(400, {'message': 'Request does not contain a valid JSON body.'})
 
     # Extract title and release_date value from request body
     title = body.get('title', None)
@@ -285,10 +285,10 @@ def create_app(test_config=None):
 
     # abort if one of these are missing with appropiate error message
     if not title:
-      abort(422, {'message': 'no title provided.'})
+      abort(422, {'message': 'No title provided, the title is required.'})
 
     if not release_date:
-      abort(422, {'message': 'no "release_date" provided.'})
+      abort(422, {'message': 'No "release_date" provided, release date is required.'})
 
     # Create new instance of movie & insert it.
     new_movie = (Movie(
@@ -319,17 +319,17 @@ def create_app(test_config=None):
 
     # Abort if no movie_id or body has been provided
     if not movie_id:
-      abort(400, {'message': 'please append an movie id to the request url.'})
+      abort(400, {'message': 'Movie id URL parameter is required, please add a movie id to the request URL.'})
 
     if not body:
-      abort(400, {'message': 'request does not contain a valid JSON body.'})
+      abort(400, {'message': 'Request does not contain a valid JSON body.'})
 
     # Find movie which should be updated by id
     movie_to_update = Movie.query.filter(Movie.id == movie_id).one_or_none()
 
     # Abort 404 if no movie with this id exists
     if not movie_to_update:
-      abort(404, {'message': 'Movie with id {} not found in database.'.format(movie_id)})
+      abort(404, {'message': 'Movie with id {} does not exist.'.format(movie_id)})
 
     # Extract title and age value from request body
     # If not given, set existing field values, so no update will happen
@@ -340,13 +340,13 @@ def create_app(test_config=None):
     movie_to_update.title = title
     movie_to_update.release_date = release_date
 
-    # Delete movie with new values
+    # Update movie with new values
     movie_to_update.update()
 
     # Return success, updated movie id and updated movie as formatted list
     return jsonify({
       'success': True,
-      'edited': movie_to_update.id,
+      'updated': movie_to_update.id,
       'movie' : [movie_to_update.format()]
     })
 
@@ -365,14 +365,14 @@ def create_app(test_config=None):
     """
     # Abort if no movie_id has been provided
     if not movie_id:
-      abort(400, {'message': 'please append an movie id to the request url.'})
+      abort(400, {'message': 'Movie id URL parameter is required, please add movie id to the request URL.'})
   
     # Find movie which should be deleted by id
     movie_to_delete = Movie.query.filter(Movie.id == movie_id).one_or_none()
 
     # If no movie with given id could found, abort 404
     if not movie_to_delete:
-        abort(404, {'message': 'Movie with id {} not found in database.'.format(movie_id)})
+        abort(404, {'message': 'Movie with id {} does not exist.'.format(movie_id)})
     
     # Delete movie from database
     movie_to_delete.delete()

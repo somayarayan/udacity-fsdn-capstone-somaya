@@ -16,7 +16,7 @@ database_path = os.environ.get('DATABASE_URL', "postgres://{}:{}@{}/{}".format(d
 db = SQLAlchemy()
 
 def setup_db(app, database_path=database_path):
-    '''binds a flask application and a SQLAlchemy service'''
+    '''Binds a flask application and a SQLAlchemy service'''
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
@@ -24,24 +24,23 @@ def setup_db(app, database_path=database_path):
     db.create_all()
 
 def db_drop_and_create_all():
-    '''drops the database tables and starts fresh
-    can be used to initialize a clean database
+    '''Drops the database tables to start fresh
+       can be used to initialize a clean database
     '''
     db.drop_all()
     db.create_all()
     db_init_records()
 
 def db_init_records():
-    '''this will initialize the database with some test records.'''
-
+    '''this is to initialize the database with some test records.'''
     new_actor = (Actor(
-        name = 'Matthew',
-        gender = 'Male',
-        age = 25
+        name = 'Somaya Rayan',
+        gender = 'Female',
+        age = 32
         ))
 
     new_movie = (Movie(
-        title = 'Matthew first Movie',
+        title = 'Life after COVID19',
         release_date = date.today()
         ))
 
@@ -60,7 +59,7 @@ def db_init_records():
 # Performance Junction Object N:N 
 #----------------------------------------------------------------------------#
 
-# Instead of creating a new Table, the documentation recommends to create a association table
+# Instead of creating a new Table, creating an association table
 Performance = db.Table('Performance', db.Model.metadata,
     db.Column('Movie_id', db.Integer, db.ForeignKey('movies.id')),
     db.Column('Actor_id', db.Integer, db.ForeignKey('actors.id')),

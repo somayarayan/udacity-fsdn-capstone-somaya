@@ -17,7 +17,7 @@ API_AUDIENCE = auth0_config['API_AUDIENCE']
 # AuthError Exception
 #----------------------------------------------------------------------------#
 class AuthError(Exception):
-    '''A standardized way to communicate auth failure modes'''
+    '''A standardized way to communicate auth failure cases'''
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
@@ -151,7 +151,7 @@ def verify_decode_jwt(token):
         except jwt.ExpiredSignatureError:
             raise AuthError({
                 'code': 'token_expired',
-                'description': 'Token expired.'
+                'description': 'Token is expired.'
             }, 401)
 
         # Raise Error if token is claiming wrong audience.

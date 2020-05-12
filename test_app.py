@@ -75,8 +75,8 @@ class AgencyTestCase(unittest.TestCase):
         """Test POST new actor."""
 
         json_create_actor = {
-            'name' : 'Crisso',
-            'age' : 25
+            'name' : 'Fernando',
+            'age' : 29
         } 
 
         res = self.client().post('/actors', json = json_create_actor, headers = casting_director_auth_header)
@@ -90,8 +90,8 @@ class AgencyTestCase(unittest.TestCase):
         """Test POST new actor w/o Authorization."""
 
         json_create_actor = {
-            'name' : 'Crisso',
-            'age' : 25
+            'name' : 'Fernando',
+            'age' : 29
         } 
 
         res = self.client().post('/actors', json = json_create_actor)
@@ -105,7 +105,7 @@ class AgencyTestCase(unittest.TestCase):
         """Test Error POST new actor."""
 
         json_create_actor_without_name = {
-            'age' : 25
+            'age' : 29
         } 
 
         res = self.client().post('/actors', json = json_create_actor_without_name, headers = casting_director_auth_header)
@@ -113,7 +113,7 @@ class AgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'], 'no name provided.')
+        self.assertEqual(data['message'], 'No name provided, name is required.')
 
 #----------------------------------------------------------------------------#
 # Tests for /actors GET
@@ -139,12 +139,12 @@ class AgencyTestCase(unittest.TestCase):
 
     def test_error_404_get_actors(self):
         """Test Error GET all actors."""
-        res = self.client().get('/actors?page=1125125125', headers = casting_assistant_auth_header)
+        res = self.client().get('/actors?page=123456789', headers = casting_assistant_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'no actors found in database.')
+        self.assertEqual(data['message'] , 'No actors found.')
 
 #----------------------------------------------------------------------------#
 # Tests for /actors PATCH
@@ -166,24 +166,24 @@ class AgencyTestCase(unittest.TestCase):
     def test_error_400_edit_actor(self):
             """Test PATCH with non json body"""
 
-            res = self.client().patch('/actors/123412', headers = casting_director_auth_header)
+            res = self.client().patch('/actors/123456', headers = casting_director_auth_header)
             data = json.loads(res.data)
 
             self.assertEqual(res.status_code, 400)
             self.assertFalse(data['success'])
-            self.assertEqual(data['message'] , 'request does not contain a valid JSON body.')
+            self.assertEqual(data['message'] , 'Request does not contain a valid JSON body.')
 
     def test_error_404_edit_actor(self):
         """Test PATCH with non valid id"""
         json_edit_actor_with_new_age = {
             'age' : 30
         } 
-        res = self.client().patch('/actors/123412', json = json_edit_actor_with_new_age, headers = casting_director_auth_header)
+        res = self.client().patch('/actors/12345', json = json_edit_actor_with_new_age, headers = casting_director_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'Actor with id 123412 not found in database.')
+        self.assertEqual(data['message'] , 'Actor with id 12345 does not exist.')
 
 #----------------------------------------------------------------------------#
 # Tests for /actors DELETE
@@ -218,12 +218,12 @@ class AgencyTestCase(unittest.TestCase):
 
     def test_error_404_delete_actor(self):
         """Test DELETE non existing actor"""
-        res = self.client().delete('/actors/15125', headers = casting_director_auth_header)
+        res = self.client().delete('/actors/12345', headers = casting_director_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'Actor with id 15125 not found in database.')
+        self.assertEqual(data['message'] , 'Actor with id 12345 does not exist.')
 
 #----------------------------------------------------------------------------#
 # Tests for /movies POST
@@ -233,7 +233,7 @@ class AgencyTestCase(unittest.TestCase):
         """Test POST new movie."""
 
         json_create_movie = {
-            'title' : 'Crisso Movie',
+            'title' : 'Notebook',
             'release_date' : date.today()
         } 
 
@@ -256,7 +256,7 @@ class AgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'], 'no title provided.')
+        self.assertEqual(data['message'], 'No title provided, the title is required.')
 
 #----------------------------------------------------------------------------#
 # Tests for /movies GET
@@ -282,12 +282,12 @@ class AgencyTestCase(unittest.TestCase):
 
     def test_error_404_get_movies(self):
         """Test Error GET all movies."""
-        res = self.client().get('/movies?page=1125125125', headers = casting_assistant_auth_header)
+        res = self.client().get('/movies?page=123456', headers = casting_assistant_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'no movies found in database.')
+        self.assertEqual(data['message'] , 'No movies found.')
 
 #----------------------------------------------------------------------------#
 # Tests for /movies PATCH
@@ -312,19 +312,19 @@ class AgencyTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 400)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'request does not contain a valid JSON body.')
+        self.assertEqual(data['message'] , 'Request does not contain a valid JSON body.')
 
     def test_error_404_edit_movie(self):
         """Test PATCH with non valid id"""
         json_edit_movie = {
             'release_date' : date.today()
         } 
-        res = self.client().patch('/movies/123412', json = json_edit_movie, headers = executive_producer_auth_header)
+        res = self.client().patch('/movies/12345', json = json_edit_movie, headers = executive_producer_auth_header)
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'Movie with id 123412 not found in database.')
+        self.assertEqual(data['message'] , 'Movie with id 12345 does not exist.')
 
 #----------------------------------------------------------------------------#
 # Tests for /movies DELETE
@@ -359,12 +359,12 @@ class AgencyTestCase(unittest.TestCase):
 
     def test_error_404_delete_movie(self):
         """Test DELETE non existing movie"""
-        res = self.client().delete('/movies/151251', headers = executive_producer_auth_header) 
+        res = self.client().delete('/movies/123456', headers = executive_producer_auth_header) 
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 404)
         self.assertFalse(data['success'])
-        self.assertEqual(data['message'] , 'Movie with id 151251 not found in database.')
+        self.assertEqual(data['message'] , 'Movie with id 123456 does not exist.')
 
 # Make the tests conveniently executable.
 # From app directory, run 'python test_app.py' to start tests
