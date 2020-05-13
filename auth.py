@@ -5,34 +5,37 @@ from jose import jwt
 from urllib.request import urlopen
 from config import auth0_config
 
-#----------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------#
 # Auth0 Config
-#----------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------#
 
 AUTH0_DOMAIN = auth0_config['AUTH0_DOMAIN']
 ALGORITHMS = auth0_config['ALGORITHMS']
 API_AUDIENCE = auth0_config['API_AUDIENCE']
 
-#----------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------#
 # AuthError Exception
-#----------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------#
+
+
 class AuthError(Exception):
     '''A standardized way to communicate auth failure cases'''
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
-    
-#----------------------------------------------------------------------------#
+
+# ----------------------------------------------------------------------------#
 # Auth Wrapper Methods
-#----------------------------------------------------------------------------#
+# ----------------------------------------------------------------------------#
+
 
 def get_token_auth_header():
     """Obtains the Access Token from the Authorization Header
 
     *Input: None
     *Output:
-       <string> token (part of the header)
-    
+    <string> token (part of the header)
+
     Conditions for Output:
        - Authorization header is available
        - header must not be malformed (i.e. Bearer XXXXX)
@@ -61,15 +64,18 @@ def get_token_auth_header():
             'description': 'Token not found.'
         }, 401)
 
-    # Raise error if "Authorization" contains more than 2 parts (it should only have 2)
+    # Raise error if "Authorization" contains
+    # more than 2 parts (it should only have 2)
     elif len(parts) > 2:
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization header must be bearer token.'
         }, 401)
 
-    # When everyhting is fine, get the token which is the second part of the Authorization Header & return it
+    # When everyhting is fine, get the token
+    # which is the second part of the Authorization Header & return it
     return parts[1]
+
 
 def check_permissions(permission, payload):
     ''' Check if permission is part of payload
@@ -78,17 +84,17 @@ def check_permissions(permission, payload):
         <string> payload (decoded jwt payload)
     *Output:
          <bool> True if all conditions have been met
-    
+
     Conditions for Output:
       - permissions are included in the payload
       - requested permission string is in the payload permissions array
 
     '''
     if 'permissions' not in payload:
-                        raise AuthError({
-                            'code': 'invalid_claims',
-                            'description': 'Permissions not included in JWT.'
-                        }, 400)
+        raise AuthError({
+            'code': 'invalid_claims',
+            'description': 'Permissions not included in JWT.'
+        }, 400)
 
     if permission not in payload['permissions']:
         raise AuthError({
@@ -97,13 +103,14 @@ def check_permissions(permission, payload):
         }, 403)
     return True
 
+
 def verify_decode_jwt(token):
     ''' Decodes JWT Token or raises appropiate Error Messages
 
     *Input
         <string> token (a json web token)
-    
-    *Output 
+
+    *Output
         <string> decoded payload
 
     Conditions for output to be returned:
@@ -117,7 +124,7 @@ def verify_decode_jwt(token):
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
-    
+
     # Check if Key id is in unverified header
     if 'kid' not in unverified_header:
         raise AuthError({
@@ -125,7 +132,7 @@ def verify_decode_jwt(token):
             'description': 'Authorization malformed.'
         }, 401)
 
-    rsa_key = {} # initialize empty private rsa key as dict
+    rsa_key = {}  # initialize empty private rsa key as dict
     for key in jwks['keys']:
         if key['kid'] == unverified_header['kid']:
             rsa_key = {
@@ -137,7 +144,8 @@ def verify_decode_jwt(token):
             }
     if rsa_key:
         try:
-            # Use Auth Config (top of file) to decode JWT and return payload if succesful
+            # Use Auth Config (top of file)
+            # to decode JWT and return payload if succesful
             payload = jwt.decode(
                 token,
                 rsa_key,
@@ -158,7 +166,8 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description':
+                'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
 
         # In all other Error cases, give generic error message
@@ -175,19 +184,20 @@ def verify_decode_jwt(token):
             }, 400)
 
 
-# TODO DONE implement @requires_auth(permission) decorator method
-
+# @requires_auth(permission) decorator method
 def requires_auth(permission=''):
     ''' Authentification Wrapper to decorate Endpoints with
-    
+
     *Input:
         <string> permission (i.e. 'post:drink')
 
     uses the get_token_auth_header method to get the token
     uses the verify_decode_jwt method to decode the jwt
-    uses the check_permissions method validate claims and check the requested permission
+    uses the check_permissions method validate claims
+    and check the requested permission
 
-    return the decorator which passes the decoded payload to the decorated method
+    return the decorator which passes the decoded payload
+    to the decorated method
     '''
     def requires_auth_decorator(f):
         @wraps(f)
@@ -195,7 +205,7 @@ def requires_auth(permission=''):
             token = get_token_auth_header()
             try:
                 payload = verify_decode_jwt(token)
-            except:
+            except Exception:
                 raise AuthError({
                     'code': 'unauthorized',
                     'description': 'Permissions not found'

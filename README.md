@@ -145,7 +145,7 @@ Each resource documentation is clearly structured:
 Query paginated actors.
 
 ```bash
-$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page1
+$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page=1
 ```
 - This API fetches the list of actors
 - Request Arguments: 
@@ -190,7 +190,7 @@ curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.co
 If you try fetch a page that does not have any actors, you will have an error which looks like this:
 
 ```bash
-$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page123124
+$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page=123124
 ```
 
 will return
@@ -249,7 +249,7 @@ If you try to create a new actor without a required field like `name`,
 it will throw a `422` error:
 
 ```bash
-$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page123124
+$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/actors?page=123124
 ```
 
 will return
@@ -395,7 +395,7 @@ will return
 Query paginated movies.
 
 ```bash
-$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page1
+$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page=1
 ```
 - This API fetches the list of movies
 - Request Arguments: 
@@ -434,7 +434,7 @@ curl --location --request GET 'https://udacity-fsdn-capstone-somaya.herokuapp.co
 If you try fetch a page which does not have any movies, you will have an error which looks like this:
 
 ```bash
-$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page123124
+$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page=123124
 ```
 
 will return
@@ -490,7 +490,7 @@ If you try to create a new movie without a required field like `title`,
 it will throw a `422` error:
 
 ```bash
-$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page123124
+$ curl -X GET https://udacity-fsdn-capstone-somaya.herokuapp.com/movies?page=123124
 ```
 
 will return
