@@ -208,7 +208,7 @@ def requires_auth(permission=''):
             except Exception:
                 raise AuthError({
                     'code': 'unauthorized',
-                    'description': 'Permissions not found'
+                    'description': 'Permissions not found or Token is expired'
                 }, 401)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
