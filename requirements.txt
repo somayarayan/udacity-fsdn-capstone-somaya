@@ -29,7 +29,7 @@ isort==4.3.18
 itsdangerous==1.1.0
 Jinja2==2.10.1
 jmespath==0.9.5
-jwcrypto==0.7
+jwcrypto==1.4
 jwt==1.0.0
 lazy-object-proxy==1.4.0
 Mako==1.1.1
